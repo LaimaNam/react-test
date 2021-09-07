@@ -7,6 +7,7 @@ const Teams = styled.section`
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  margin-top: 40px;
 
   div {
     width: 100%;

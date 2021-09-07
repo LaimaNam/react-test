@@ -7,6 +7,7 @@ import styled from 'styled-components';
 const HeaderStyled = styled.div`
   width: 100%;
   background-color: #3d5a80;
+  background-color: #e07a5f;
   color: #fff;
 
   header {
@@ -16,7 +17,6 @@ const HeaderStyled = styled.div`
     margin: auto;
     justify-content: space-between;
     padding-left: 10px;
-    padding-right: 10px;
   }
 
   ul {
@@ -64,7 +64,7 @@ const Header = () => {
   return (
     <HeaderStyled>
       <header className="header">
-        <div>BATTLENET</div>
+        <div>TEAMS BATTLE</div>
         <nav>
           <ul>
             <li>

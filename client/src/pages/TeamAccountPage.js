@@ -13,26 +13,54 @@ const TeamMain = styled.div`
     padding: 20px 0;
   }
 
+  .teamMainInfo .loggedInTeam {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .teamMainInfo .loggedInTeam h2 {
+  }
+
   .teamMainInfo button {
-    padding: 10px 15px;
-    margin-top: 20px;
+    padding: 7px 10px;
+
     border: none;
-    background-color: #98c1d9;
+    background-color: #e07a5f;
+    /* background-color: #f2cc8f; */
+    letter-spacing: 1px;
     color: #fff;
     transition: 0.3s;
   }
   .teamMainInfo button:hover {
     background-color: #3d5a80;
+    background-color: #98c1d9;
     cursor: pointer;
   }
 
-  h4 {
-    margin: 20px;
+  .teamMainInfo .battleRules {
+    position: relative;
+    display: flex;
+    width: 80%;
+    margin: auto;
   }
 
-  p {
-    width: 70%;
-    margin: auto;
+  .teamMainInfo .battleRules h4 {
+    writing-mode: vertical-rl;
+    text-orientation: sideways-right;
+    text-orientation: use-glyph-orientation;
+    background-color: #98c1d9;
+    padding: 0px 20px;
+    color: #fff;
+    letter-spacing: 1px;
+  }
+
+  .teamMainInfo .battleRules p {
+    padding: 20px;
+    border: 2px solid #98c1d9;
   }
 `;
 
@@ -222,15 +250,20 @@ const TeamAccountPage = () => {
       {teamsToShow && currentTeam ? (
         <TeamMain>
           <div className="teamMainInfo" image={currentTeam.image}>
-            <h2>{currentTeam.title} team account page</h2>
-            <h4>Rules</h4>
-            <p>
-              You can only vote one time on each team. 1 score up(+) or 1 score
-              down(-). Once voted - there is no turning back. So think twice
-              before giving your vote. If team has 0 score you can not vote
-              down.
-            </p>
-            <button onClick={() => logoutTeam()}>Logout</button>
+            <div className="loggedInTeam">
+              <h2>{currentTeam.title} team</h2>
+              <button onClick={() => logoutTeam()}>Logout</button>
+            </div>
+
+            <div className="battleRules">
+              <h4>Rules</h4>
+              <p>
+                You can only vote one time on each team. 1 score up(+) or 1
+                score down(-). Once voted - there is no turning back. If team
+                has 0 score you can not vote down. Think twice before giving
+                your vote.
+              </p>
+            </div>
           </div>
           <Teams>
             {teamsToShow.map((team) => (
