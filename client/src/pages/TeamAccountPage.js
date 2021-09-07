@@ -3,7 +3,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router';
 import { TeamContext } from './../App';
-import Button from '../components/Button';
 
 //styles
 const Teams = styled.section`
