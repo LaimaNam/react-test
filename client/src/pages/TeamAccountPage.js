@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router';
 import { TeamContext } from './../App';
+import Button from '../components/Button';
 
 //styles
 const Teams = styled.section`
@@ -104,7 +105,6 @@ const TeamAccountPage = () => {
   };
 
   const downVote = (e) => {
-    console.log(e.target.id);
     const downVotingFor = e.target.id;
 
     const teamToDownVote = votes.find(
@@ -149,6 +149,7 @@ const TeamAccountPage = () => {
                     : team.title}
                 </h4>
                 <p>Score: {team.votes}</p>
+
                 <button id={team._id} onClick={upVote}>
                   +
                 </button>
