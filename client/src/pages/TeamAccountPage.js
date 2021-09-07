@@ -5,24 +5,112 @@ import { useHistory } from 'react-router';
 import { TeamContext } from './../App';
 
 //styles
+const TeamMain = styled.div`
+  text-align: center;
+  max-width: 1024px;
+  margin: auto;
+  .teamMainInfo {
+    padding: 20px 0;
+  }
+
+  .teamMainInfo button {
+    padding: 10px 15px;
+    margin-top: 20px;
+    border: none;
+    background-color: #98c1d9;
+    color: #fff;
+    transition: 0.3s;
+  }
+  .teamMainInfo button:hover {
+    background-color: #3d5a80;
+    cursor: pointer;
+  }
+
+  h4 {
+    margin: 20px;
+  }
+
+  p {
+    width: 70%;
+    margin: auto;
+  }
+`;
+
 const Teams = styled.section`
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
+  gap: 10px;
+
   div {
-    width: calc(100% / 4 - 10px);
-    padding: 10px;
+    width: 100%;
     text-align: center;
+    box-shadow: 0px 0px 10px -3px #000000;
+    margin-bottom: 20px;
   }
 
-  div h4,
-  p {
+  h4 {
     margin: 0;
+    margin-top: 5px;
   }
+
+  p {
+    margin-bottom: 15px;
+  }
+
   div img {
     width: 100%;
     height: 200px;
     object-fit: cover;
+  }
+
+  div button {
+    width: 50%;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .remove:hover {
+    background-color: tomato;
+    color: #fff;
+  }
+
+  .add {
+    background-color: #98c1d9;
+    color: #fff;
+  }
+  .add:hover {
+    background-color: #3d5a80;
+    cursor: pointer;
+  }
+
+  @media (min-width: 508px) {
+    div {
+      width: calc(100% / 2 - 10px);
+      text-align: center;
+      box-shadow: 0px 0px 10px -3px #000000;
+      margin-bottom: 20px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    div {
+      width: calc(100% / 3 - 10px);
+      text-align: center;
+      box-shadow: 0px 0px 10px -3px #000000;
+      margin-bottom: 20px;
+    }
+  }
+
+  @media (min-width: 1000px) {
+    div {
+      width: calc(100% / 4 - 10px);
+      text-align: center;
+      box-shadow: 0px 0px 10px -3px #000000;
+      margin-bottom: 20px;
+    }
   }
 `;
 
@@ -132,10 +220,16 @@ const TeamAccountPage = () => {
   return (
     <main>
       {teamsToShow && currentTeam ? (
-        <>
-          <h2>{currentTeam.title} account page</h2>
-          <div>
-            <p>{state.team}</p>
+        <TeamMain>
+          <div className="teamMainInfo" image={currentTeam.image}>
+            <h2>{currentTeam.title} team account page</h2>
+            <h4>Rules</h4>
+            <p>
+              You can only vote one time on each team. 1 score up(+) or 1 score
+              down(-). Once voted - there is no turning back. So think twice
+              before giving your vote. If team has 0 score you can not vote
+              down.
+            </p>
             <button onClick={() => logoutTeam()}>Logout</button>
           </div>
           <Teams>
@@ -144,21 +238,21 @@ const TeamAccountPage = () => {
                 <img src={team.image} alt="" />
                 <h4>
                   {currentTeam._id === team._id
-                    ? `${team.title}(Your team)`
-                    : team.title}
+                    ? `${team.title} team (Your team)`
+                    : `${team.title} team`}
                 </h4>
                 <p>Score: {team.votes}</p>
 
-                <button id={team._id} onClick={upVote}>
-                  +
+                <button className="remove" id={team._id} onClick={downVote}>
+                  &#x268A;
                 </button>
-                <button id={team._id} onClick={downVote}>
-                  -
+                <button className="add" id={team._id} onClick={upVote}>
+                  &#x271A;
                 </button>
               </div>
             ))}
           </Teams>
-        </>
+        </TeamMain>
       ) : (
         <p>Something went wrong</p>
       )}

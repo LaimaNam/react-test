@@ -6,7 +6,7 @@ import styled from 'styled-components';
 //styles
 const HeaderStyled = styled.div`
   width: 100%;
-  background-color: blue;
+  background-color: #3d5a80;
   color: #fff;
 
   header {
@@ -22,10 +22,16 @@ const HeaderStyled = styled.div`
   ul {
     display: flex;
     gap: 10px;
+    margin: 0;
   }
 
   li {
     list-style: none;
+    padding: 15px 10px;
+  }
+
+  li:hover {
+    background-color: #98c1d9;
   }
 
   a {
@@ -58,7 +64,7 @@ const Header = () => {
   return (
     <HeaderStyled>
       <header className="header">
-        <div>TEAMS BATTLE</div>
+        <div>BATTLENET</div>
         <nav>
           <ul>
             <li>
