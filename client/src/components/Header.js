@@ -7,7 +7,7 @@ import styled from 'styled-components';
 const HeaderStyled = styled.div`
   width: 100%;
   background-color: #3d5a80;
-  background-color: #e07a5f;
+  /* background-color: #e07a5f; */
   color: #fff;
 
   header {
