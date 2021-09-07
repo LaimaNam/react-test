@@ -96,26 +96,38 @@ const TeamAccountPage = () => {
     //validating if logged in team already voted or not
     if (teamToVote.voted_by.indexOf(state.team) === -1) {
       console.log('UPVOTE -> validation ran');
+
       updateVotes(votingFor, voteDataToUpdate);
       getTeams(state.team, setTeamsToShow, setCurrentTeam);
       getVotes(setVotes);
     }
-
-    return;
   };
 
   const downVote = (e) => {
     console.log(e.target.id);
-    // const downVotingFor = e.target.id;
+    const downVotingFor = e.target.id;
 
-    // const teamToDownVote = votes.find(
-    //   (teamToVote) => teamToVote.team_id === downVotingFor
-    // );
+    const teamToDownVote = votes.find(
+      (teamToVote) => teamToVote.team_id === downVotingFor
+    );
 
-    // let voteDataToUpdate = {
-    //   votes: teamToDownVote.votes - 1,
-    //   voted_by: state.team,
-    // };
+    let voteDataToUpdate = {
+      votes: teamToDownVote.votes - 1,
+      voted_by: state.team,
+    };
+
+    //validating if logged in team already voted or not
+
+    if (
+      teamToDownVote.voted_by.indexOf(state.team) === -1 &&
+      teamToDownVote.votes > 0
+    ) {
+      console.log('DOWNVOTE -> validation ran');
+
+      updateVotes(downVotingFor, voteDataToUpdate);
+      getTeams(state.team, setTeamsToShow, setCurrentTeam);
+      getVotes(setVotes);
+    }
   };
 
   return (
