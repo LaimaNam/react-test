@@ -154,11 +154,11 @@ const Teams = styled.section`
 `;
 
 // -- API URL
-// const GET_TEAMS_URI = 'http://localhost:5000/api/teams';
-// const GET_VOTES_URI = 'http://localhost:5000/api/votes/';
+const GET_TEAMS_URI = 'http://localhost:5000/api/teams';
+const GET_VOTES_URI = 'http://localhost:5000/api/votes/';
 
-const GET_TEAMS_URI = 'https://ca-react-test.herokuapp.com/api/teams';
-const GET_VOTES_URI = 'https://ca-react-test.herokuapp.com/api/votes/';
+// const GET_TEAMS_URI = 'https://ca-react-test.herokuapp.com/api/teams';
+// const GET_VOTES_URI = 'https://ca-react-test.herokuapp.com/api/votes/';
 
 const getTeams = async (id, setTeamsToShow, setCurrentTeam) => {
   try {
@@ -257,13 +257,18 @@ const TeamAccountPage = () => {
     }
   };
 
+  //finding out on what team current logged in team already voted and rendering a badge "already voted"
   const votedFor = (teamId, currentTeamId) => {
     const teamToVote = votes.find((vote) => vote.team_id === teamId);
-    if (teamToVote.voted_by.some((id) => id === currentTeamId)) {
-      return true;
+
+    if (teamToVote && teamToVote.voted_by) {
+      if (teamToVote.voted_by.some((id) => id === currentTeamId)) {
+        return true;
+      }
     }
   };
 
+  //  --------------- Rendering
   return (
     <main>
       {teamsToShow && currentTeam ? (

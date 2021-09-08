@@ -59,10 +59,10 @@ const FormsStyled = styled.div`
 `;
 
 //API URI
-// const TEAMS_LOGIN_URI = "http://localhost:5000/api/teams/login"
-// const TEAMS_SIGNUP_URI= 'http://localhost:5000/api/teams/signup'
-const TEAMS_LOGIN_URI = 'https://ca-react-test.herokuapp.com/api/teams/login';
-const TEAMS_SIGNUP_URI = 'https://ca-react-test.herokuapp.com/api/teams/signup';
+const TEAMS_LOGIN_URI = 'http://localhost:5000/api/teams/login';
+const TEAMS_SIGNUP_URI = 'http://localhost:5000/api/teams/signup';
+// const TEAMS_LOGIN_URI = 'https://ca-react-test.herokuapp.com/api/teams/login';
+// const TEAMS_SIGNUP_URI = 'https://ca-react-test.herokuapp.com/api/teams/signup';
 
 const LoginPage = () => {
   //Hooks
