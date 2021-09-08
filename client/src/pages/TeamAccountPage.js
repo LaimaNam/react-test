@@ -109,9 +109,19 @@ const Teams = styled.section`
     background-color: #98c1d9;
     color: #fff;
   }
+
   .add:hover {
     background-color: #3d5a80;
     cursor: pointer;
+  }
+
+  .isVoted {
+    font-size: 0.8em;
+    margin: 3px auto;
+    margin: 0;
+    background-color: #e07a5f;
+    color: #fff;
+    letter-spacing: 1px;
   }
 
   @media (min-width: 508px) {
@@ -183,20 +193,19 @@ const TeamAccountPage = () => {
   // -- redirects
   const history = useHistory();
 
-  // side effects
+  // -- side effects
   useEffect(() => {
     getTeams(state.team, setTeamsToShow, setCurrentTeam);
     getVotes(setVotes);
   }, [state.team]);
 
-  //custom functions
+  // CUSTOM FUNCTIONS
   const logoutTeam = () => {
     dispatch({ type: 'LOGOUT', team: '' });
     localStorage.removeItem('team');
     history.push('/login');
   };
 
-  //add vote
   const upVote = (e) => {
     const votingFor = e.target.id;
 
@@ -217,6 +226,8 @@ const TeamAccountPage = () => {
       getTeams(state.team, setTeamsToShow, setCurrentTeam);
       getVotes(setVotes);
     }
+
+    alert('You already voted for this team!');
   };
 
   const downVote = (e) => {
@@ -242,6 +253,15 @@ const TeamAccountPage = () => {
       updateVotes(downVotingFor, voteDataToUpdate);
       getTeams(state.team, setTeamsToShow, setCurrentTeam);
       getVotes(setVotes);
+    }
+
+    alert('You already voted for this team!');
+  };
+
+  const votedFor = (teamId, currentTeamId) => {
+    const teamToVote = votes.find((vote) => vote.team_id === teamId);
+    if (teamToVote.voted_by.some((id) => id === currentTeamId)) {
+      return true;
     }
   };
 
@@ -282,6 +302,9 @@ const TeamAccountPage = () => {
                 <button className="add" id={team._id} onClick={upVote}>
                   &#x271A;
                 </button>
+                {votedFor(team._id, state.team) && (
+                  <p className="isVoted">You already voted for this team</p>
+                )}
               </div>
             ))}
           </Teams>
