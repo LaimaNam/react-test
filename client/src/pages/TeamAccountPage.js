@@ -227,8 +227,6 @@ const TeamAccountPage = () => {
       getTeams(state.team, setTeamsToShow, setCurrentTeam);
       getVotes(setVotes);
     }
-
-    alert('You already voted for this team!');
   };
 
   const downVote = (e) => {
@@ -244,7 +242,6 @@ const TeamAccountPage = () => {
     };
 
     //validating if logged in team already voted or not
-
     if (
       teamToDownVote.voted_by.indexOf(state.team) === -1 &&
       teamToDownVote.votes > 0
@@ -255,8 +252,6 @@ const TeamAccountPage = () => {
       getTeams(state.team, setTeamsToShow, setCurrentTeam);
       getVotes(setVotes);
     }
-
-    alert('You already voted for this team!');
   };
 
   const votedFor = (teamId, currentTeamId) => {
