@@ -51,7 +51,6 @@ const TeamMain = styled.div`
   .teamMainInfo .battleRules h4 {
     writing-mode: vertical-rl;
     text-orientation: sideways-right;
-    text-orientation: use-glyph-orientation;
     background-color: #98c1d9;
     padding: 0px 20px;
     color: #fff;
@@ -75,6 +74,7 @@ const Teams = styled.section`
     text-align: center;
     box-shadow: 0px 0px 10px -3px #000000;
     margin-bottom: 20px;
+    position: relative;
   }
 
   h4 {
@@ -116,12 +116,13 @@ const Teams = styled.section`
   }
 
   .isVoted {
-    font-size: 0.8em;
-    margin: 3px auto;
+    position: absolute;
     margin: 0;
+    padding: 10px 5px;
     background-color: #e07a5f;
     color: #fff;
-    letter-spacing: 1px;
+    writing-mode: vertical-rl;
+    text-orientation: sideways-right;
   }
 
   @media (min-width: 508px) {
@@ -288,6 +289,9 @@ const TeamAccountPage = () => {
           <Teams>
             {teamsToShow.map((team) => (
               <div key={team._id}>
+                {votedFor(team._id, state.team) && (
+                  <p className="isVoted">Already voted</p>
+                )}
                 <img src={team.image} alt="" />
                 <h4>
                   {currentTeam._id === team._id
@@ -302,9 +306,6 @@ const TeamAccountPage = () => {
                 <button className="add" id={team._id} onClick={upVote}>
                   &#x271A;
                 </button>
-                {votedFor(team._id, state.team) && (
-                  <p className="isVoted">You already voted for this team</p>
-                )}
               </div>
             ))}
           </Teams>
