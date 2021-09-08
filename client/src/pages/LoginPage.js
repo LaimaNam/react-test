@@ -90,7 +90,7 @@ const LoginPage = () => {
     console.log(loginEmail, loginPasword);
 
     axios
-      .post('http://localhost:5000/api/teams/login', {
+      .post('https://ca-react-test.herokuapp.com/api/teams/login', {
         email: loginEmail,
         password: loginPasword,
       })
@@ -122,7 +122,7 @@ const LoginPage = () => {
     }
 
     axios
-      .post('http://localhost:5000/api/teams/signup', {
+      .post('https://ca-react-test.herokuapp.com/signup', {
         image: signupTeamImage,
         title: signupTeamTitle,
         email: signupEmail,
