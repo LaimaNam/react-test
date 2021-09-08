@@ -60,7 +60,7 @@ const Teams = styled.section`
 `;
 
 // -- API URL
-const GET_TEAMS_URI = 'https://ca-react-test.herokuapp.com/api/teams';
+const GET_TEAMS_URI = 'http://localhost:5000/api/teams';
 
 const getTeams = async (setAllTeams) => {
   try {

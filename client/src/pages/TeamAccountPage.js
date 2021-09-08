@@ -154,8 +154,8 @@ const Teams = styled.section`
 `;
 
 // -- API URL
-const GET_TEAMS_URI = 'https://ca-react-test.herokuapp.coms/api/teams';
-const GET_VOTES_URI = 'https://ca-react-test.herokuapp.com/api/votes/';
+const GET_TEAMS_URI = 'http://localhost:5000/api/teams';
+const GET_VOTES_URI = 'http://localhost:5000/api/votes/';
 
 const getTeams = async (id, setTeamsToShow, setCurrentTeam) => {
   try {
