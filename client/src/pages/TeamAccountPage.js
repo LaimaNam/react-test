@@ -180,8 +180,8 @@ const getVotes = async (setVotes) => {
   }
 };
 
-const updateVotes = (teamToVoteId, vote) => {
-  return axios.put(GET_VOTES_URI + teamToVoteId, vote);
+const updateVotes = async (teamToVoteId, vote) => {
+  return await axios.put(GET_VOTES_URI + teamToVoteId, vote);
 };
 
 const TeamAccountPage = () => {
@@ -210,50 +210,40 @@ const TeamAccountPage = () => {
     history.push('/login');
   };
 
-  const upVote = (e) => {
+  const vote = async (e, typeOfVote) => {
     const votingFor = e.target.id;
 
     const teamToVote = votes.find(
       (teamToVote) => teamToVote.team_id === votingFor
     );
 
-    let voteDataToUpdate = {
-      votes: teamToVote.votes + 1,
-      voted_by: state.team,
-    };
+    if (typeOfVote === 'increment') {
+      let voteDataToUpdate = {
+        votes: teamToVote.votes + 1,
+        voted_by: state.team,
+      };
 
-    //validating if logged in team already voted or not
-    if (teamToVote.voted_by.indexOf(state.team) === -1) {
-      console.log('UPVOTE -> validation ran');
+      //validating if logged in team already voted or not
+      if (teamToVote.voted_by.indexOf(state.team) === -1) {
+        await updateVotes(votingFor, voteDataToUpdate);
+        getTeams(state.team, setTeamsToShow, setCurrentTeam);
+        getVotes(setVotes);
+      }
+    } else if (typeOfVote === 'decrement') {
+      let voteDataToUpdate = {
+        votes: teamToVote.votes - 1,
+        voted_by: state.team,
+      };
 
-      updateVotes(votingFor, voteDataToUpdate);
-      getTeams(state.team, setTeamsToShow, setCurrentTeam);
-      getVotes(setVotes);
-    }
-  };
-
-  const downVote = (e) => {
-    const downVotingFor = e.target.id;
-
-    const teamToDownVote = votes.find(
-      (teamToVote) => teamToVote.team_id === downVotingFor
-    );
-
-    let voteDataToUpdate = {
-      votes: teamToDownVote.votes - 1,
-      voted_by: state.team,
-    };
-
-    //validating if logged in team already voted or not
-    if (
-      teamToDownVote.voted_by.indexOf(state.team) === -1 &&
-      teamToDownVote.votes > 0
-    ) {
-      console.log('DOWNVOTE -> validation ran');
-
-      updateVotes(downVotingFor, voteDataToUpdate);
-      getTeams(state.team, setTeamsToShow, setCurrentTeam);
-      getVotes(setVotes);
+      //validating if logged in team already voted or not
+      if (
+        teamToVote.voted_by.indexOf(state.team) === -1 &&
+        teamToVote.votes > 0
+      ) {
+        await updateVotes(votingFor, voteDataToUpdate);
+        getTeams(state.team, setTeamsToShow, setCurrentTeam);
+        getVotes(setVotes);
+      }
     }
   };
 
@@ -303,10 +293,18 @@ const TeamAccountPage = () => {
                 </h4>
                 <p>Score: {team.votes}</p>
 
-                <button className="remove" id={team._id} onClick={downVote}>
+                <button
+                  className="remove"
+                  id={team._id}
+                  onClick={(e) => vote(e, 'decrement')}
+                >
                   &#x268A;
                 </button>
-                <button className="add" id={team._id} onClick={upVote}>
+                <button
+                  className="add"
+                  id={team._id}
+                  onClick={(e) => vote(e, 'increment')}
+                >
                   &#x271A;
                 </button>
               </div>
